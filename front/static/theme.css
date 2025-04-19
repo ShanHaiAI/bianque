@@ -14,15 +14,8 @@ main {
     background-color: #F9F0E0; /* 设置背景颜色 */
 }
 
-#bianque-image {
-    margin-top: 5rem; /* 图片宽度自适应 */
-    width: 20rem; /* 缩小图片宽度 */
-    display: block; /* 确保图片块级元素 */
-}
-
-#content-container {
-    width: 40rem; /* 控制内容区域宽度 */
-    max-width: 800px; /* 设置最大宽度 */
+#bianque-image img {
+    width: 30rem; /* 缩小图片宽度 */
 }
 
 /* 添加Tabs切换动画 */
@@ -32,12 +25,13 @@ main {
 }
 
 .tabitem {
-    padding:0px !important;
+    padding: 0 !important;
 }
 
 .tab-content.active {
     opacity: 1;
 }
+
 /* 修改 role="tab" 的样式 */
 /* 修改 Tab 标签的字体大小和颜色 */
 [role="tab"] {
@@ -65,22 +59,9 @@ main {
     content: none !important;
 }
 
-#text-input {
-    padding:0.5rem;
-}
-
-#image-input {
-    overflow: hidden; /* 隐藏溢出 */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
-            border-radius: 1rem; /* 圆角 */
-
-    padding:0.5rem;
-}
-
-
-#input-dialog {
+.tab-input {
     display: flex;
-    flex-direction: column;
+    padding: 0.5rem;
     border: 1px solid #ccc; /* 边框 */
     align-items: center;
     border-radius: 1rem; /* 圆角 */
@@ -88,14 +69,26 @@ main {
     overflow: hidden; /* 隐藏溢出 */
 }
 
-#markdown-text {
-    color: #888888; /* 字体颜色变灰 */
-    margin-left: 2rem; /* 添加缩进 */
+#chatbot {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc; /* 边框 */
+    align-items: center;
+    border-radius: 1rem; /* 圆角 */
+    box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.2), /* 仅底部外阴影 */ inset 0 6px 8px -6px rgba(0, 0, 0, 0.13);
+    /*overflow: hidden; !* 隐藏溢出 *!*/
+}
+
+#chatbot > div > div {
+    padding: 0;
+    box-shadow: inset 0 6px 8px -6px rgba(0, 0, 0, 0.13);
 }
 
 
-#submit-btn {
-    margin-left: auto; /* 将提交按钮靠右 */
+#markdown-text {
+    color: #888888; /* 字体颜色变灰 */
+    text-align: center; /* 文字居中 */
+    margin: 0 auto; /* 移除左边距，使用自动边距实现居中 */
 }
 
 .submit-button {
@@ -109,8 +102,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem; /* 设置宽度 */
-    height: 2rem; /* 设置高度 */
+    width: 2rem;
+    height: 2rem;
 }
 
 .submit-button:hover {
@@ -130,11 +123,11 @@ main {
     width: 25rem; /* 设置宽度 */
 }
 
-.dialog div{
-    border: 0px;
+.dialog > div {
+    border: 0;
 }
 
-.block-submit{
+.block-submit {
     background-color: #E0D0C0;
     border: none;
     cursor: pointer;
@@ -147,12 +140,12 @@ main {
 }
 
 #close-btn {
-    right: 0rem;
+    /*right: 0;*/
     background: none;
     border: none;
     width: 1rem;
     height: 1rem;
-    padding: 0rem;
+    padding: 0;
     font-size: 1rem;
     text-align: right;
     margin-left: auto;
@@ -183,14 +176,54 @@ main {
 
 #person-btn img {
     color: #335152;
-   width: 1.5rem;  /* 设置你想要的宽度 */
-   height: 1.5rem; /* 设置你想要的高度 */
+    width: 1.5rem; /* 设置你想要的宽度 */
+    height: 1.5rem; /* 设置你想要的高度 */
 }
 
 #person-btn:hover {
     background-color: #D0C0B0; /* 鼠标悬停时的背景颜色 */
 }
 
-#dialog-header {
- height: 1rem; /* 设置高度 */
+.avatar-container {
+    height: 2.5rem;
+    width: 2.5rem;
+    border: 0;
+}
+
+.avatar-image {
+    padding: 0;
+}
+
+#analysis-btn {
+    position: absolute; /* 绝对定位 */
+    bottom: 0.5rem; /* 距离底部间距 */
+    right: 0.5rem; /* 距离右侧间距 */
+    background-color: #E0D0C0;
+    border: none;
+    border-radius: 50%; /* 圆形按钮 */
+    width: 2rem; /* 固定宽度 */
+    height: 2rem;
+    font-size: 1.2rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #335152;
+    transition: background-color 0.3s ease;
+}
+
+#analysis-btn:hover {
+    background-color: #D0C0B0;
+}
+
+
+#dialog-title {
+    margin: 0;
+    color: #335152;
+}
+
+#dialog-title h3 {
+    margin: 0;
+    font-size: 1.2rem;
 }
