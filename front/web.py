@@ -1,58 +1,57 @@
 # front/web_ui.py
 import gradio as gr
-from core.diagnosis_agent import DiagnosisAgent
-from core.report_agent import ReportAgent
-from ocr_tool import ocr_extract_text
-from rag_tool import MilvusVectorKnowledgeBase
 
 
-def consult(patient_input):
-    agent = DiagnosisAgent()
-    return agent.run(patient_input)
+def close_dialog():
+    return gr.update(visible=False)
 
 
-def analyze_report(report_text):
-    agent = ReportAgent()
-    return agent.run(report_text)
+def submit_info(name, age, gender):
+    return f"提交的信息：\n姓名: {name}\n年龄: {age}\n性别: {gender}"
 
 
-def ocr_demo(image):
-    temp_path = "temp_report.jpg"
-    image.save(temp_path)
-    text = ocr_extract_text(temp_path)
-    return text
+with gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as demo:
+    # 创建一个悬浮窗（对话框）
+    with gr.Column(visible=False, elem_classes="dialog") as dialog:
+        close_btn = gr.Button("×", elem_id="close-btn")
+        close_btn.click(fn=close_dialog, inputs=[], outputs=dialog)
+        age = gr.Number(label="年龄")
+        gender = gr.Radio(label="性别", choices=["男", "女"])
+        medical_record = gr.Textbox(label="即往病史", submit_btn=False, lines=5, )
+        submit_btn = gr.Button("提交", elem_classes="block-submit")
+    button = gr.Button(
+        value="",
+        icon='./static/user-circle.svg'
+        , elem_id="person-btn")
+    button.click(fn=lambda: gr.update(visible=True),
+                 inputs=[],
+                 outputs=dialog)
+    with gr.Row():
+        gr.Image(value='./static/banner.jpg',
+                 elem_id="bianque-image",
+                 show_fullscreen_button=False,
+                 show_download_button=False,
+                 container=False,
+                 )
 
+    with gr.Column(elem_id="content-container"):  # 包裹主要内容，控制宽度
+        with gr.Tabs():
+            with gr.TabItem("问问扁鹊"):
+                # 文字输入框
+                with gr.Column(elem_id="input-dialog"):
+                    text_input = gr.Textbox(placeholder="请输入您的症状描述",
+                                            submit_btn='➤',
+                                            # show_label=True,
+                                            # interactive=True,
+                                            container=False,
+                                            lines=5,
+                                            elem_id="text-input")
+                    # 文件上传和语音输入按钮
+                    # submit_btn = gr.Button("问问扁鹊", elem_id="submit-btn")
+            with gr.TabItem("看看报告"):
+                image_input = gr.File(show_label=False, elem_id="image-input")
+                gr.Button("解析报告", elem_classes="block-submit")
+        gr.Markdown("温馨提示：所有建议仅供参考，如有异常请及时就医。", elem_id="markdown-text")
 
-def upload_documents(files):
-    texts = []
-    for file_obj in files:
-        text = file_obj.read().decode("utf-8")
-        texts.append(text)
-    kb = MilvusVectorKnowledgeBase()
-    result = kb.insert_documents(texts)
-    return result
-
-
-with gr.Blocks() as demo:
-    gr.Markdown("## 扁鹊 AI 医疗自诊")
-
-    with gr.Tabs():
-        with gr.TabItem("在线问诊"):
-            text_input = gr.Textbox(lines=5, label="请输入您的症状描述")
-            output_text = gr.Textbox(lines=10, label="问诊结果")
-            gr.Button("提交问诊").click(fn=consult, inputs=text_input, outputs=output_text)
-
-        with gr.TabItem("体检报告解析"):
-            image_input = gr.Image(type="pil", label="上传体检报告图片")
-            ocr_output = gr.Textbox(label="OCR 解析结果")
-            gr.Button("解析报告").click(fn=ocr_demo, inputs=image_input, outputs=ocr_output)
-
-        with gr.TabItem("知识库构建", visible=False):  # 隐藏页面：仅授权用户可访问
-            gr.Markdown("### 上传专业文档构建向量知识库")
-            file_upload = gr.File(file_count="multiple", label="上传文档（文本格式）")
-            upload_output = gr.Textbox(label="上传结果")
-            gr.Button("上传文档").click(fn=upload_documents, inputs=file_upload, outputs=upload_output)
-
-    gr.Markdown("温馨提示：所有建议仅供参考，如有异常请及时就医。")
-
-demo.launch()
+demo.launch(
+    debug=True)

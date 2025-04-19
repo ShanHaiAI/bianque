@@ -1,0 +1,196 @@
+body {
+    background-color: #F9F0E0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 居中对齐 */
+}
+
+gradio-app {
+    background-color: #F9F0E0; /* 设置背景颜色 */
+}
+
+main {
+    background-color: #F9F0E0; /* 设置背景颜色 */
+}
+
+#bianque-image {
+    margin-top: 5rem; /* 图片宽度自适应 */
+    width: 20rem; /* 缩小图片宽度 */
+    display: block; /* 确保图片块级元素 */
+}
+
+#content-container {
+    width: 40rem; /* 控制内容区域宽度 */
+    max-width: 800px; /* 设置最大宽度 */
+}
+
+/* 添加Tabs切换动画 */
+.tab-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.tabitem {
+    padding:0px !important;
+}
+
+.tab-content.active {
+    opacity: 1;
+}
+/* 修改 role="tab" 的样式 */
+/* 修改 Tab 标签的字体大小和颜色 */
+[role="tab"] {
+    border-radius: 1rem; /* 全圆角 */
+    margin: 0.5rem; /* 增加间距 */
+    padding: 0.5rem 1rem; /* 增加内边距 */
+    background-color: #F9F0E0; /* 默认背景颜色 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+    color: #335152; /* 字体颜色 */
+}
+
+[role="tab"][aria-selected="true"] {
+    background-color: #E0D0C0; /* 选中背景颜色 */
+    font-weight: bold; /* 选中时加粗字体 */
+    color: #335152; /* 选中时字体颜色 */
+}
+
+
+/* 去掉 Tab 标签的 ::after 伪元素 */
+[role="tab"]::after {
+    content: none !important;
+}
+
+[role="tablist"]::after {
+    content: none !important;
+}
+
+#text-input {
+    padding:0.5rem;
+}
+
+#image-input {
+    overflow: hidden; /* 隐藏溢出 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
+            border-radius: 1rem; /* 圆角 */
+
+    padding:0.5rem;
+}
+
+
+#input-dialog {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc; /* 边框 */
+    align-items: center;
+    border-radius: 1rem; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
+    overflow: hidden; /* 隐藏溢出 */
+}
+
+#markdown-text {
+    color: #888888; /* 字体颜色变灰 */
+    margin-left: 2rem; /* 添加缩进 */
+}
+
+
+#submit-btn {
+    margin-left: auto; /* 将提交按钮靠右 */
+}
+
+.submit-button {
+    background-color: #E0D0C0;
+    border: none;
+    border-radius: 50%; /* 设置为50%以实现全圆角 */
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #335152;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem; /* 设置宽度 */
+    height: 2rem; /* 设置高度 */
+}
+
+.submit-button:hover {
+    background-color: #D0C0B0;
+}
+
+.dialog {
+    position: fixed; /* 固定定位，使其悬浮在页面上层 */
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 确保完全居中 */
+    background-color: white; /* 背景颜色 */
+    padding: 1rem; /* 内边距 */
+    border-radius: 1rem; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+    z-index: 1000; /* 确保 dialog 在最上层 */
+    width: 25rem; /* 设置宽度 */
+}
+
+.dialog div{
+    border: 0px;
+}
+
+.block-submit{
+    background-color: #E0D0C0;
+    border: none;
+    cursor: pointer;
+    color: #335152;
+    transition: background-color 0.3s ease;
+}
+
+.block-submit:hover {
+    background-color: #D0C0B0;
+}
+
+#close-btn {
+    right: 0rem;
+    background: none;
+    border: none;
+    width: 1rem;
+    height: 1rem;
+    padding: 0rem;
+    font-size: 1rem;
+    text-align: right;
+    margin-left: auto;
+    cursor: pointer;
+    color: #335152;
+}
+
+#close-btn:hover {
+    color: #D0C0B0;
+}
+
+#person-btn {
+    position: fixed; /* 固定定位，使其悬浮在页面上层 */
+    top: 30px; /* 距离底部 20px */
+    right: 30px; /* 距离右侧 20px */
+    z-index: 1000; /* 确保按钮在最上层 */
+    background-color: #E0D0C0; /* 背景颜色 */
+    border: none; /* 去掉边框 */
+    border-radius: 50%; /* 设置为圆形 */
+    width: 2.5rem; /* 宽度 */
+    height: 2.5rem; /* 高度 */
+    font-size: 2rem; /* 字体大小 */
+    color: #335152; /* 字体颜色 */
+    cursor: pointer; /* 鼠标指针样式 */
+    transition: background-color 0.3s ease; /* 添加过渡效果 */
+    padding: 0; /* 去掉内边距 */
+}
+
+#person-btn img {
+    color: #335152;
+   width: 1.5rem;  /* 设置你想要的宽度 */
+   height: 1.5rem; /* 设置你想要的高度 */
+}
+
+#person-btn:hover {
+    background-color: #D0C0B0; /* 鼠标悬停时的背景颜色 */
+}
+
+#dialog-header {
+ height: 1rem; /* 设置高度 */
+}
