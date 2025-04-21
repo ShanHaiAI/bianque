@@ -4,6 +4,7 @@ import gradio as gr
 from front.ocr import process_image
 from core import diag_agent
 
+
 # 添加报告处理函数
 def analyze_report(image):
     if image is None:
@@ -24,42 +25,35 @@ def close_dialog():
 
 
 def call_large_model(input_text):
-    # 获取迭代器
     response_iterator = diag_agent.run(input_text, user_id='0')
-
-    # 初始化完整响应
     full_response = ""
 
-    # 逐步获取并返回响应
     try:
         for chunk in response_iterator:
             if isinstance(chunk, dict):
-                # 如果是字典类型的响应，提取消息内容
                 message = chunk.get('content', '') or chunk.get('message', '')
                 full_response += message
             else:
-                # 如果是字符串类型的响应直接添加
                 full_response += str(chunk)
-            # 使用yield返回当前累积的响应
-            yield full_response
+        return full_response
     except Exception as e:
-        yield f"发生错误: {str(e)}"
-
-def add_user_input(input_text, chat_history):
-    chat_history.append({"role": "user", "content": input_text})
-    # 添加一个空的助手回复
-    return chat_history
+        return f"发生错误: {str(e)}"
 
 def process_input(input_text, chat_history):
-    # chat_history.append({"role": "user", "content": input_text})
-    # 添加一个空的助手回复
-    chat_history.append({"role": "assistant", "content": ""})
+    # 添加用户消息
+    chat_history.append({"role": "user", "content": input_text})
 
-    # 获取动态响应
-    for response in call_large_model(input_text):
-        # 更新最后一条助手消息
-        chat_history[-1]["content"] = response
-        yield chat_history
+    # 获取助手回复
+    bot_response = ""
+    try:
+        for chunk in call_large_model(input_text):
+            bot_response += str(chunk)
+    except Exception as e:
+        bot_response = f"发生错误: {str(e)}"
+
+    # 添加助手消息
+    chat_history.append({"role": "assistant", "content": bot_response})
+    return "", chat_history
 
 
 def submit_info(gender):
@@ -96,13 +90,13 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
         with gr.Row(elem_id="dialog-header"):
             with gr.Column(scale=3):
                 gr.Markdown("### 录入信息", elem_id="dialog-title")
-            with gr.Column(scale=1,min_width=0):
-                close_btn = gr.Button("×", elem_id="close-btn",min_width=0)
+            with gr.Column(scale=1, min_width=0):
+                close_btn = gr.Button("×", elem_id="close-btn", min_width=0)
         close_btn.click(fn=close_dialog, inputs=[], outputs=dialog)
         age = gr.Number(label="年龄")
         gender = gr.Radio(label="性别", choices=["男", "女"])
         medical_record = gr.Textbox(label="即往病史", submit_btn=False, lines=5, )
-        submit_btn = gr.Button("提交", elem_classes="block-submit",min_width=0)
+        submit_btn = gr.Button("提交", elem_classes="block-submit", min_width=0)
         submit_btn.click(fn=submit_info, inputs=gender, outputs=[dialog, chatbot])
     button = gr.Button(
         value="",
@@ -134,15 +128,9 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                     }
                     """
                 # 在submit事件中启用队列
-                text_input.submit(fn=add_user_input,
-                                  inputs=[text_input, chatbot],
-                                  outputs=[chatbot],
-                                  queue=True)  # 启用队列支持
                 text_input.submit(fn=process_input,
                                   inputs=[text_input, chatbot],
-                                  outputs=[chatbot],
-                                  queue=True)  # 启用队列支持
-                text_input.submit(lambda: "", inputs=[], outputs=text_input)
+                                  outputs=[text_input, chatbot])  # 启用队列支持
             with gr.TabItem("看看报告"):
                 image_input = gr.File(
                     height=115,
