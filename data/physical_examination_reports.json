@@ -1,0 +1,1337 @@
+[
+    {
+      "id": 1,
+      "indicator_name": "体温（腋下测量）",
+      "category": "基础体征",
+      "reference_range": "36.0-37.0",
+      "unit": "°C",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          ">37.3°C：建议4小时后复测，伴随寒战需查血常规",
+          "<35.5°C：排查低温暴露史，检测甲状腺功能"
+        ],
+        "日常建议": [
+          "测量前擦干腋汗静坐30分钟",
+          "剧烈运动后需等待1小时测量"
+        ],
+        "注意事项": [
+          "婴幼儿建议使用肛温测量",
+          "长期低热需排查结核感染"
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "indicator_name": "静息心率",
+      "category": "基础体征",
+      "reference_range": "60-100",
+      "unit": "次/分钟",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          "持续>100次：建议24小时动态心电图监测",
+          "<50次：排查房室传导阻滞，运动员除外"
+        ],
+        "日常建议": [
+          "避免过量摄入咖啡因（每日<400mg）",
+          "练习深呼吸训练（6次/分钟呼吸法）"
+        ],
+        "特殊人群": [
+          "孕妇心率可上浮10-20次/分钟",
+          "运动员静息心率可能低至40次/分钟"
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "indicator_name": "血压",
+      "category": "基础体征",
+      "reference_range": "收缩压90-140/舒张压60-90",
+      "unit": "mmHg",
+      "gender": "通用",
+      "medical_advice": {
+        "分级管理": [
+          "≥140/90：非同日三次测量确认高血压诊断",
+          "<90/60：排查脱水/心功能不全"
+        ],
+        "干预措施": [
+          "临界高血压（130-139/85-89）：限盐<5g/日+减重5%",
+          "低血压：增加水分摄入，穿戴弹力袜"
+        ],
+        "测量规范": [
+          "测量前静坐5分钟，双脚平放地面",
+          "袖带与心脏保持同一水平",
+          "首次测量应检查双侧上肢差异"
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "indicator_name": "总血量",
+      "category": "血液系统",
+      "reference_range": "65-90",
+      "unit": "ml/kg",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          ">90ml/kg：排查红细胞增多症/慢性缺氧",
+          "<65ml/kg：评估脱水或贫血状态"
+        ],
+        "检测建议": [
+          "放射性核素标记法为金标准",
+          "急诊出血时估算失血量=体重×总血量×(初始Hct-当前Hct)"
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "indicator_name": "全血比重（男性）",
+      "category": "血液系统",
+      "reference_range": "1.054-1.062",
+      "unit": "无",
+      "gender": "男",
+      "medical_advice": {
+        "临床意义": [
+          "↑：见于红细胞增多症/脱水",
+          "↓：提示贫血或血浆蛋白异常"
+        ],
+        "检测注意": [
+          "需使用硫酸铜比重法测量",
+          "与血红蛋白浓度正相关"
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "indicator_name": "全血比重（女性）",
+      "category": "血液系统",
+      "reference_range": "1.048-1.062",
+      "unit": "无",
+      "gender": "女",
+      "medical_advice": {
+        "特殊考虑": [
+          "妊娠期生理性血液稀释可降至1.040",
+          "月经周期影响波动约±0.002"
+        ],
+        "诊断提示": [
+          "持续>1.060需排查真性红细胞增多症",
+          "<1.040结合MCV判断贫血类型"
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "indicator_name": "血浆比重",
+      "category": "血液系统",
+      "reference_range": "1.024-1.029",
+      "unit": "无",
+      "gender": "通用",
+      "medical_advice": {
+        "异常分析": [
+          "↑：高球蛋白血症（如多发性骨髓瘤）",
+          "↓：低蛋白血症/水中毒"
+        ],
+        "治疗关联": [
+          "指导血浆置换治疗参数设置",
+          "烧伤补液重要参考指标"
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "indicator_name": "血胶体渗透压",
+      "category": "血液系统",
+      "reference_range": "21±3",
+      "unit": "mmHg",
+      "gender": "通用",
+      "medical_advice": {
+        "临床管理": [
+          "<18mmHg：提示需要补充白蛋白",
+          "肝病患者维持>15mmHg防腹水"
+        ],
+        "计算公式": [
+          "≈2.1×血浆总蛋白(g/dl)+0.16×球蛋白(g/dl)"
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "indicator_name": "血晶体渗透压",
+      "category": "血液系统",
+      "reference_range": "280-310",
+      "unit": "mOsm/kg",
+      "gender": "通用",
+      "medical_advice": {
+        "急症处理": [
+          ">310mOsm：高渗性脱水需低渗补液",
+          "<280mOsm：水中毒限制入量+利尿"
+        ],
+        "监测重点": [
+          "糖尿病高渗昏迷>330mOsm",
+          "计算公式：2×[Na+]+[Glu]/18+[BUN]/2.8"
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "indicator_name": "红细胞计数（男性）",
+      "category": "红细胞系统",
+      "reference_range": "4.0-5.5",
+      "unit": "×10¹²/L",
+      "gender": "男",
+      "medical_advice": {
+        "病理提示": [
+          ">5.5：真性红细胞增多症/慢性缺氧",
+          "<4.0：贫血需结合MCV分类"
+        ],
+        "生理波动": [
+          "高原居民可升高0.5×10¹²/L",
+          "昼夜波动约±0.2×10¹²/L"
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "indicator_name": "红细胞计数（女性）",
+      "category": "红细胞系统",
+      "reference_range": "3.5-5.0",
+      "unit": "×10¹²/L",
+      "gender": "女",
+      "medical_advice": {
+        "特殊考虑": [
+          "妊娠期生理性降低达3.0×10¹²/L",
+          "月经后3-5天检测最准确"
+        ]
+      }
+    },
+
+    {
+      "id": 12,
+      "indicator_name": "血红蛋白（男性）",
+      "category": "红细胞系统",
+      "reference_range": "120-160",
+      "unit": "g/L",
+      "gender": "男",
+      "medical_advice": {
+        "分级管理": [
+          "90-120：轻度贫血（需分型）",
+          "<90：输血评估指征"
+        ],
+        "营养治疗": [
+          "缺铁性贫血：元素铁150-200mg/日",
+          "维生素B12缺乏：1000μg肌注/周"
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "indicator_name": "血红蛋白（女性）",
+      "category": "红细胞系统",
+      "reference_range": "110-150",
+      "unit": "g/L",
+      "gender": "女",
+      "medical_advice": {
+        "鉴别诊断": [
+          "<110伴小细胞：查铁代谢指标",
+          "正常细胞性：排查溶血/肾病"
+        ]
+      }
+    },
+
+    {
+      "id": 14,
+      "indicator_name": "红细胞压积（男性）",
+      "category": "红细胞系统",
+      "reference_range": "0.40-0.50",
+      "unit": "L/L",
+      "gender": "男",
+      "medical_advice": {
+        "临床决策": [
+          ">0.50：血液浓缩需扩容",
+          "<0.35：输血阈值参考"
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "indicator_name": "红细胞压积（女性）",
+      "category": "红细胞系统",
+      "reference_range": "0.37-0.48",
+      "unit": "L/L",
+      "gender": "女",
+      "medical_advice": {
+        "计算公式": [
+          "HCT≈RBC×MCV/1000",
+          "与全血比重正相关"
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "indicator_name": "红细胞平均直径",
+      "category": "红细胞系统",
+      "reference_range": "7.33±0.29",
+      "unit": "μm",
+      "gender": "通用",
+      "medical_advice": {
+        "形态学意义": [
+          ">8.5μm：巨幼细胞性贫血",
+          "<6.5μm：缺铁性贫血"
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "indicator_name": "平均血红蛋白量(MCH)",
+      "category": "红细胞系统",
+      "reference_range": "29.36±3.43",
+      "unit": "pg",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断价值": [
+          ">32pg：巨幼细胞性改变",
+          "<27pg：小细胞低色素特征"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "indicator_name": "平均红细胞体积(MCV)",
+      "category": "红细胞系统",
+      "reference_range": "93.28±9.80",
+      "unit": "fL",
+      "gender": "通用",
+      "medical_advice": {
+        "贫血分类": [
+          ">100fL：大细胞性贫血",
+          "80-100fL：正细胞性",
+          "<80fL：小细胞性"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "indicator_name": "平均血红蛋白浓度(MCHC)",
+      "category": "红细胞系统",
+      "reference_range": "310-350",
+      "unit": "g/L",
+      "gender": "通用",
+      "medical_advice": {
+        "特殊提示": [
+          ">380g/L：遗传性球形红细胞症",
+          "<300g/L：缺铁/地中海贫血"
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "indicator_name": "网织红细胞计数",
+      "category": "红细胞系统",
+      "reference_range": "0.5-1.5",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "动态监测": [
+          ">2%：提示有效造血（溶血/出血后）",
+          "<0.5%：骨髓抑制表现"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "indicator_name": "红细胞渗透脆性试验",
+      "category": "红细胞系统",
+      "reference_range": "开始溶解0.44-0.47% | 完全溶解0.31-0.34%",
+      "unit": "NaCl溶液浓度",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断价值": [
+          "脆性增高：遗传性球形红细胞症",
+          "脆性减低：地中海贫血/缺铁性贫血"
+        ],
+        "检测标准": [
+          "需与健康对照同步检测",
+          "标本需新鲜（<2小时）"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "indicator_name": "白细胞总数",
+      "category": "白细胞系统",
+      "reference_range": "4.0-10.0",
+      "unit": "×10⁹/L",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          ">10.0×10⁹/L：细菌感染/白血病可能",
+          "<4.0×10⁹/L：病毒感染/药物反应"
+        ],
+        "检测提示": [
+          "剧烈运动后可能生理性升高",
+          "化疗患者需密切监测"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "indicator_name": "中性粒细胞比例",
+      "category": "白细胞分类",
+      "reference_range": "50-70",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "临床意义": [
+          ">80%：急性细菌感染/应激反应",
+          "<40%：病毒感染/粒细胞缺乏"
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "indicator_name": "嗜酸粒细胞比例",
+      "category": "白细胞分类",
+      "reference_range": "0.5-3",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断提示": [
+          ">5%：过敏/寄生虫感染",
+          ">20%：嗜酸粒细胞白血病"
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "indicator_name": "嗜碱粒细胞比例",
+      "category": "白细胞分类",
+      "reference_range": "0-0.75",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "特殊注意": [
+          ">1%：慢性粒细胞白血病可能",
+          "持续0%属正常现象"
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "indicator_name": "淋巴细胞比例",
+      "category": "白细胞分类",
+      "reference_range": "20-40",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "异常分析": [
+          ">50%：病毒感染/淋巴细胞白血病",
+          "<20%：免疫缺陷/放疗后"
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "indicator_name": "单核细胞比例",
+      "category": "白细胞分类",
+      "reference_range": "1-8",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "临床意义": [
+          ">10%：结核/传染性单核细胞增多症",
+          "<1%：无特殊病理意义"
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "indicator_name": "嗜酸粒细胞直接计数",
+      "category": "白细胞系统",
+      "reference_range": "0.05-0.30",
+      "unit": "×10⁹/L",
+      "gender": "通用",
+      "medical_advice": {
+        "动态监测": [
+          ">0.5×10⁹/L：过敏性疾病活动期",
+          "治疗中下降>50%为有效指标"
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "indicator_name": "血小板计数",
+      "category": "凝血功能",
+      "reference_range": "100-300",
+      "unit": "×10⁹/L",
+      "gender": "通用",
+      "medical_advice": {
+        "危急值": ["<50×10⁹/L：自发出血风险", ">1000×10⁹/L：血栓风险"],
+        "临床干预": ["免疫性血小板减少症：首选糖皮质激素", "肝素诱导需立即停药"]
+      }
+    },
+    {
+      "id": 30,
+      "indicator_name": "出血时间(Duke法)",
+      "category": "凝血功能",
+      "reference_range": "1-3",
+      "unit": "分钟",
+      "gender": "通用",
+      "medical_advice": {
+        "延长意义": ["血管性血友病筛查指标", "血小板功能异常检测"],
+        "操作规范": ["穿刺深度3-4mm", "每30秒吸一次滤纸"]
+      }
+    },
+    {
+      "id": 31,
+      "indicator_name": "凝血时间(试管法)",
+      "category": "凝血功能",
+      "reference_range": "4-12",
+      "unit": "分钟",
+      "gender": "通用",
+      "medical_advice": {
+        "异常分析": [">12min：内源性凝血途径缺陷", "<4min：高凝状态"],
+        "检测局限": ["已逐步被APTT替代"]
+      }
+    },
+    {
+      "id": 32,
+      "indicator_name": "凝血酶原时间(PT)",
+      "category": "凝血功能",
+      "reference_range": "11-14",
+      "unit": "秒",
+      "gender": "通用",
+      "medical_advice": {
+        "INR换算": ["目标值：房颤2-3 | 机械瓣膜2.5-3.5"],
+        "临床决策": ["延长>3秒提示VitK依赖因子缺乏"]
+      }
+    },
+    {
+      "id": 33,
+      "indicator_name": "血块收缩时间",
+      "category": "凝血功能",
+      "reference_range": "30-60min开始收缩",
+      "unit": "小时",
+      "gender": "通用",
+      "medical_advice": {
+        "病理关联": ["收缩不良提示血小板无力症", "提前收缩见于严重贫血"]
+      }
+    },
+    {
+      "id": 34,
+      "indicator_name": "活化部分凝血活酶时间(APTT)",
+      "category": "凝血功能",
+      "reference_range": "25-35",
+      "unit": "秒",
+      "gender": "通用",
+      "medical_advice": {
+        "监测应用": ["肝素治疗维持1.5-2.5倍", ">100秒提示抑制物存在"]
+      }
+    },
+    {
+      "id": 35,
+      "indicator_name": "凝血酶时间(TT)",
+      "category": "凝血功能",
+      "reference_range": "13-17",
+      "unit": "秒",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断价值": ["延长提示纤维蛋白原异常", "肝素污染敏感指标"]
+      }
+    },
+    {
+      "id": 36,
+      "indicator_name": "复钙时间",
+      "category": "凝血功能",
+      "reference_range": "1.5-3.0",
+      "unit": "分钟",
+      "gender": "通用",
+      "medical_advice": {
+        "实验原理": ["检测内源性凝血途径", "比APTT少接触激活剂"]
+      }
+    },
+    {
+      "id": 37,
+      "indicator_name": "凝血活酶生成试验",
+      "category": "凝血功能",
+      "reference_range": "基质血浆9-11秒",
+      "unit": "秒",
+      "gender": "通用",
+      "medical_advice": {
+        "分型诊断": ["鉴别血友病A/B类型", "检测凝血因子Ⅷ/Ⅸ活性"]
+      }
+    },
+    {
+      "id": 38,
+      "indicator_name": "空腹血糖",
+      "category": "糖代谢",
+      "reference_range": "3.9-5.6",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "分级管理": [
+          "≥7.0：糖尿病诊断标准",
+          "2.8-3.8：低血糖风险监测"
+        ],
+        "检测规范": [
+          "至少8小时空腹采血",
+          "应激状态可能暂时性升高"
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "indicator_name": "尿素",
+      "category": "氮代谢",
+      "reference_range": "3.2-7.0",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "肾前性因素": [
+          ">7.0：脱水/高蛋白饮食",
+          "<3.2：低蛋白摄入/肝病"
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "indicator_name": "尿素氮(BUN)",
+      "category": "氮代谢",
+      "reference_range": "2.9-7.1",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "肾衰分期": [
+          ">28.6：尿毒症期",
+          "BUN/Cr>20提示肾前性"
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "indicator_name": "非蛋白氮(NPN)",
+      "category": "氮代谢",
+      "reference_range": "14.3-25.0",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "检测演进": [
+          "已逐步被BUN替代",
+          "含尿酸/肌酐/氨基酸等"
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "indicator_name": "尿酸(UA)",
+      "category": "嘌呤代谢",
+      "reference_range": "208-428",
+      "unit": "μmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "痛风管理": [
+          ">480需降尿酸治疗",
+          "避免高嘌呤饮食"
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "indicator_name": "血清肌酐(Scr)",
+      "category": "肾功能",
+      "reference_range": "44-133",
+      "unit": "μmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "eGFR计算": [
+          "CKD-EPI公式更准确",
+          ">450考虑透析准备"
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "indicator_name": "肌酸",
+      "category": "能量代谢",
+      "reference_range": "15-46",
+      "unit": "μmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "病理提示": [
+          ">100：横纹肌溶解",
+          "监测CK-MB同工酶"
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "indicator_name": "丙酮酸",
+      "category": "糖代谢",
+      "reference_range": "30-100",
+      "unit": "μmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "代谢疾病": [
+          ">140：维生素B1缺乏",
+          "乳酸/丙酮酸比值>25提示线粒体病"
+        ]
+      }
+    },
+
+    {
+      "id": 46,
+      "indicator_name": "总胆固醇(TC)",
+      "category": "血脂",
+      "reference_range": "3.1-5.7",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "危险分层": [
+          "≥7.2：高胆固醇血症",
+          "HDL-C/TC>0.24降低风险"
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "indicator_name": "胆固醇酯",
+      "category": "血脂",
+      "reference_range": "2.8-6.0",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "肝胆疾病": [
+          "<2.8：LCAT缺乏",
+          "酯化比例<70%提示肝损"
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "indicator_name": "磷脂",
+      "category": "血脂",
+      "reference_range": "1.7-3.2",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "新生儿监测": [
+          "<1.0：呼吸窘迫综合征风险",
+          "羊水L/S比值评估肺成熟度"
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "indicator_name": "甘油三酯(TG)",
+      "category": "血脂",
+      "reference_range": "0.4-1.7",
+      "unit": "mmol/L",
+      "gender": "通用",
+      "medical_advice": {
+        "胰腺炎预警": [
+          ">11.3：急性胰腺炎高风险",
+          "极低脂饮食后复查"
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "indicator_name": "每搏输出量(SV)-男性",
+      "category": "心功能",
+      "reference_range": "95.53±5.6",
+      "unit": "ml/次",
+      "gender": "男",
+      "medical_advice": {
+        "临床意义": [
+          "<70ml：前负荷不足/收缩力降低",
+          ">120ml：高动力状态"
+        ],
+        "优化策略": [
+          "低SV伴高HR：容量复苏",
+          "低SV伴低HR：正性肌力药物"
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "indicator_name": "每搏输出量(SV)-女性",
+      "category": "心功能",
+      "reference_range": "76.99±4.1",
+      "unit": "ml/次",
+      "gender": "女",
+      "medical_advice": {
+        "生理差异": [
+          "妊娠期增加40-50%",
+          "绝经后下降15-20%"
+        ]
+      }
+    },
+    {
+      "id": 52,
+      "indicator_name": "心输出量(CO)",
+      "category": "心功能",
+      "reference_range": "4.0-8.0",
+      "unit": "L/min",
+      "gender": "通用",
+      "medical_advice": {
+        "休克管理": [
+          "<2.5：心源性休克阈值",
+          ">10.0：败血症高排期"
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "indicator_name": "心脏指数(CI)",
+      "category": "心功能",
+      "reference_range": "2.5-4.0",
+      "unit": "L/min/m²",
+      "gender": "通用",
+      "medical_advice": {
+        "分级标准": [
+          "<1.8：终末期心衰",
+          "2.2-2.4：IABP植入指征"
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "indicator_name": "射血分数(EF)",
+      "category": "心功能",
+      "reference_range": "55-70",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "心衰分级": [
+          "40-55%：轻度减低",
+          "<40%：收缩性心衰"
+        ],
+        "治疗目标": [
+          "HFrEF：ARNI+β阻滞剂",
+          "HFpEF：控制容量负荷"
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "indicator_name": "左室舒张末压(LVEDP)",
+      "category": "心功能",
+      "reference_range": "5-12",
+      "unit": "mmHg",
+      "gender": "通用",
+      "medical_advice": {
+        "导管监测": [
+          ">15：急性肺水肿风险",
+          "<5：容量不足"
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "indicator_name": "肺毛细血管楔压(PCWP)",
+      "category": "心功能",
+      "reference_range": "6-12",
+      "unit": "mmHg",
+      "gender": "通用",
+      "medical_advice": {
+        "鉴别诊断": [
+          ">18：心源性肺水肿",
+          "<6：低血容量状态"
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "indicator_name": "全肺血管阻力(PVR)",
+      "category": "心功能",
+      "reference_range": "80-120",
+      "unit": "dyn·s/cm⁵",
+      "gender": "通用",
+      "medical_advice": {
+        "肺动脉高压": [
+          ">240：靶向药物治疗",
+          ">400：肺移植评估"
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "indicator_name": "臂-舌循环时间",
+      "category": "心功能",
+      "reference_range": "9-16",
+      "unit": "秒",
+      "gender": "通用",
+      "medical_advice": {
+        "病理延长": [
+          ">20：低心输出量",
+          ">30：右心衰竭"
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "indicator_name": "肺活量(VC)-男性",
+      "category": "肺功能",
+      "reference_range": "2.31×BSA",
+      "unit": "L",
+      "gender": "男",
+      "medical_advice": {
+        "临床分期": [
+          "<80%预计值：限制性通气障碍",
+          "FEV1/VC>70%：区分限制性与阻塞性"
+        ],
+        "康复建议": [
+          "腹式呼吸训练改善通气",
+          "术后呼吸肌功能锻炼"
+        ]
+      }
+    },
+    {
+      "id": 60,
+      "indicator_name": "肺活量(VC)-女性",
+      "category": "肺功能",
+      "reference_range": "1.80×BSA",
+      "unit": "L",
+      "gender": "女",
+      "medical_advice": {
+        "特殊考虑": [
+          "妊娠期减少15-20%",
+          "脊柱侧弯影响可达30%"
+        ]
+      }
+    },
+    {
+      "id": 61,
+      "indicator_name": "残气量(RV)-男性",
+      "category": "肺功能",
+      "reference_range": "1.53",
+      "unit": "L",
+      "gender": "男",
+      "medical_advice": {
+        "阻塞性病变": [
+          ">2.0L提示肺气肿",
+          "RV/TLC>40%诊断标准"
+        ]
+      }
+    },
+    {
+      "id": 62,
+      "indicator_name": "残气量(RV)-女性",
+      "category": "肺功能",
+      "reference_range": "1.02",
+      "unit": "L",
+      "gender": "女",
+      "medical_advice": {
+        "病理提示": [
+          ">1.5L需查α1-抗胰蛋白酶",
+          "肺纤维化可<0.8L"
+        ]
+      }
+    },
+    {
+      "id": 63,
+      "indicator_name": "肺总量(TLC)-男性",
+      "category": "肺功能",
+      "reference_range": "5.02",
+      "unit": "L",
+      "gender": "男",
+      "medical_advice": {
+        "诊断阈值": [
+          "<80%预计值：限制性病变",
+          ">120%预计值：过度充气"
+        ]
+      }
+    },
+    {
+      "id": 64,
+      "indicator_name": "肺总量(TLC)-女性",
+      "category": "肺功能",
+      "reference_range": "3.46",
+      "unit": "L",
+      "gender": "女",
+      "medical_advice": {
+        "检测方法": [
+          "体描箱法金标准",
+          "He稀释法误差±10%"
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "indicator_name": "残总比(RV/TLC)",
+      "category": "肺功能",
+      "reference_range": "<35",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "分级标准": [
+          "35-45%：轻度肺气肿",
+          ">45%：重度肺气肿"
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "indicator_name": "解剖无效腔",
+      "category": "肺功能",
+      "reference_range": "0.15-0.20",
+      "unit": "L",
+      "gender": "通用",
+      "medical_advice": {
+        "病理改变": [
+          ">0.25L：支气管扩张症",
+          "机械通气需补偿6-8ml/kg"
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "indicator_name": "生长激素(GH)-成人",
+      "category": "内分泌",
+      "reference_range": "<3",
+      "unit": "μg/L",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          ">5μg/L：建议葡萄糖抑制试验",
+          "<0.4μg/L：儿童生长迟缓评估"
+        ],
+        "检测规范": [
+          "清晨安静卧位采血",
+          "应激状态可能假性升高"
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "indicator_name": "生长激素(GH)-儿童",
+      "category": "内分泌",
+      "reference_range": "<5",
+      "unit": "μg/L",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断提示": [
+          "运动后>7μg/L排除GHD",
+          "精氨酸激发试验峰值<10确诊"
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "indicator_name": "促甲状腺激素(TSH)",
+      "category": "内分泌",
+      "reference_range": "0.4-4.0",
+      "unit": "mIU/L",
+      "gender": "通用",
+      "medical_advice": {
+        "分级管理": [
+          ">10：原发性甲减开始替代治疗",
+          "0.1-0.4：亚临床甲亢随访"
+        ],
+        "特殊人群": [
+          "妊娠早期<2.5mIU/L",
+          "老年上限可放宽至6.0"
+        ]
+      }
+    },
+    {
+      "id": 70,
+      "indicator_name": "泌乳素(PRL)-男性",
+      "category": "内分泌",
+      "reference_range": "6.0-13.0",
+      "unit": "μg/L",
+      "gender": "男",
+      "medical_advice": {
+        "病理提示": [
+          ">20μg/L：垂体MRI检查",
+          "<5μg/L：多巴胺激动剂过量"
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "indicator_name": "泌乳素(PRL)-非妊娠女性",
+      "category": "内分泌",
+      "reference_range": "9.0-25.0",
+      "unit": "μg/L",
+      "gender": "女",
+      "medical_advice": {
+        "月经周期影响": [
+          "卵泡期升高30%",
+          "黄体期达峰值"
+        ],
+        "药物干扰": [
+          "利培酮可升高5-10倍",
+          "卡麦角林治疗阈值"
+        ]
+      }
+    },
+    {
+      "id": 72,
+      "indicator_name": "泌乳素(PRL)-妊娠期",
+      "category": "内分泌",
+      "reference_range": "30-400",
+      "unit": "μg/L",
+      "gender": "女",
+      "medical_advice": {
+        "妊娠分期": [
+          "孕晚期可达非孕10倍",
+          "产后4周恢复基线"
+        ],
+        "哺乳管理": [
+          ">200μg/L维持乳汁分泌",
+          "溴隐亭停药指征"
+        ]
+      }
+    },
+    {
+      "id": 73,
+      "indicator_name": "红细胞沉降率(ESR)-Cuter法男性",
+      "category": "炎症指标",
+      "reference_range": "0-8",
+      "unit": "mm/h",
+      "gender": "男",
+      "medical_advice": {
+        "异常处理": [
+          ">15：排查结核/骨髓瘤",
+          ">100：巨球蛋白血症可能"
+        ],
+        "干扰因素": [
+          "每增高10g/L纤维蛋白原，ESR增加约15mm",
+          "贫血(Hb<90g/L)需校正：ESR实测值×(Hb/120)"
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "indicator_name": "红细胞沉降率(ESR)-Cuter法女性",
+      "category": "炎症指标",
+      "reference_range": "0-10",
+      "unit": "mm/h",
+      "gender": "女",
+      "medical_advice": {
+        "生理波动": [
+          "月经期可升高5-10mm",
+          "妊娠晚期达40-50mm"
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "indicator_name": "红细胞沉降率(ESR)-Wetergren法男性",
+      "category": "炎症指标",
+      "reference_range": "0-15",
+      "unit": "mm/h",
+      "gender": "男",
+      "medical_advice": {
+        "临床提示": [
+          "与CRP联合检测提高特异性",
+          "风湿热活动期>60mm"
+        ]
+      }
+    },
+    {
+      "id": 76,
+      "indicator_name": "红细胞沉降率(ESR)-Wetergren法女性",
+      "category": "炎症指标",
+      "reference_range": "0-20",
+      "unit": "mm/h",
+      "gender": "女",
+      "medical_advice": {
+        "年龄校正": [
+          ">50岁参考值=年龄/2"
+        ]
+      }
+    },
+    {
+      "id": 77,
+      "indicator_name": "四唑氮蓝还原试验(NBT)",
+      "category": "免疫功能",
+      "reference_range": "<10",
+      "unit": "%",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断价值": [
+          ">30%：细菌感染活动期",
+          "<5%：慢性肉芽肿病(CGD)"
+        ],
+        "检测规范": [
+          "需设内毒素刺激阳性对照",
+          "标本需新鲜(<2小时)"
+        ]
+      }
+    },
+    {
+      "id": 78,
+      "indicator_name": "优球蛋白溶解时间(ELT)",
+      "category": "纤溶系统",
+      "reference_range": ">120",
+      "unit": "分钟",
+      "gender": "通用",
+      "medical_advice": {
+        "异常处理": [
+          "<70：DIC纤溶亢进期",
+          "70-90：肝硬化/AML可能",
+          "标本需预冷至4℃"
+        ]
+      }
+    },
+    {
+      "id": 79,
+      "indicator_name": "纤维蛋白降解产物(FDP)-胶乳法",
+      "category": "纤溶系统",
+      "reference_range": "<5",
+      "unit": "mg/L",
+      "gender": "通用",
+      "medical_advice": {
+        "临床决策": [
+          ">20：提示DIC/肺血栓",
+          "溶栓治疗目标值：300-400"
+        ]
+      }
+    },
+    {
+      "id": 80,
+      "indicator_name": "血浆鱼精蛋白副凝试验(3P)",
+      "category": "纤溶系统",
+      "reference_range": "阴性",
+      "gender": "通用",
+      "medical_advice": {
+        "结果解读": [
+          "阳性：继发性纤溶（DIC中期）",
+          "假阳性：创伤性采血/高脂血症"
+        ]
+      }
+    },
+    {
+      "id": 81,
+      "indicator_name": "乙醇凝胶试验",
+      "category": "纤溶系统",
+      "reference_range": "阴性",
+      "gender": "通用",
+      "medical_advice": {
+        "诊断价值": [
+          "阳性率比3P试验低15%",
+          "特异性>95%"
+        ]
+      }
+    },
+    {
+      "id": 82,
+      "indicator_name": "ABO血型抗原",
+      "category": "免疫血液学",
+      "reference_range": {
+        "A型": "A抗原+抗B抗体",
+        "B型": "B抗原+抗A抗体",
+        "AB型": "A/B抗原+无抗体",
+        "O型": "无抗原+抗A/B抗体"
+      },
+      "medical_advice": {
+        "输血原则": [
+          "同型输注优先",
+          "紧急情况下O型红细胞+AB血浆"
+        ],
+        "特殊注意": [
+          "AB型血浆含抗A1抗体需交叉配血",
+          "亚型检测（如A2）需特殊试剂"
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "indicator_name": "RhD血型",
+      "category": "免疫血液学",
+      "reference_range": "阳性/阴性",
+      "medical_advice": {
+        "临床管理": [
+          "Rh阴性孕妇需抗D免疫球蛋白",
+          "抗体筛查阳性者需辐照血"
+        ]
+      }
+    },
+    {
+      "id": 84,
+      "indicator_name": "中心静脉压(CVP)-成人仰卧位",
+      "category": "血流动力学",
+      "reference_range": "6-12",
+      "unit": "cmH₂O",
+      "medical_advice": {
+        "动态监测": [
+          "<6：容量不足（补液）",
+          ">15：右心衰竭（利尿）"
+        ],
+        "波形分析": [
+          "a波消失提示房颤",
+          "v波增高：三尖瓣反流"
+        ]
+      }
+    },
+    {
+      "id": 85,
+      "indicator_name": "中心静脉压(CVP)-儿童",
+      "category": "血流动力学",
+      "reference_range": "4-8",
+      "unit": "cmH₂O",
+      "medical_advice": {
+        "年龄校正": [
+          "新生儿：2-6cmH₂O",
+          "每增加3岁上限+1cm"
+        ]
+      }
+    },
+    {
+      "id": 86,
+      "indicator_name": "动脉血pH",
+      "category": "血气分析",
+      "reference_range": "7.35-7.45",
+      "unit": "无",
+      "medical_advice": {
+        "代偿公式": [
+          "急性呼吸酸中毒：pH=0.08×(PaCO₂-40)/10",
+          "代谢性酸中毒：预计PaCO₂=1.5×HCO₃⁻+8±2"
+        ]
+      }
+    },
+    {
+      "id": 87,
+      "indicator_name": "PaO₂",
+      "category": "血气分析",
+      "reference_range": {
+        "成人": "80-100",
+        "新生儿": "60-80"
+      },
+      "unit": "mmHg",
+      "medical_advice": {
+        "氧合评估": [
+          "<60：呼吸衰竭Ⅰ型",
+          "FiO₂每增加10%，PaO₂应升30-50"
+        ]
+      }
+    },
+    {
+      "id": 88,
+      "indicator_name": "PaCO₂",
+      "category": "血气分析",
+      "reference_range": "35-45",
+      "unit": "mmHg",
+      "medical_advice": {
+        "通气评估": [
+          ">50：呼吸衰竭Ⅱ型",
+          "<35：过度通气代偿"
+        ]
+      }
+    },
+    {
+      "id": 89,
+      "indicator_name": "HCO₃⁻",
+      "category": "血气分析",
+      "reference_range": "22-26",
+      "unit": "mmol/L",
+      "medical_advice": {
+        "酸碱平衡": [
+          "<22：代谢性酸中毒",
+          ">26：代谢性碱中毒"
+        ]
+      }
+    }
+]

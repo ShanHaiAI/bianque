@@ -1,9 +1,11 @@
 import logging
 import os
-from pydantic import BaseModel, Field
-from pydantic import BaseModel, Field
 from typing import Optional, List
-from typing import Optional, List
+
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.schema import Document
+from langchain.vectorstores import FAISS
+from pydantic import BaseModel, Field
 
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 logging.basicConfig(
@@ -31,25 +33,35 @@ class MedicalReport(BaseModel):
     report_text: Optional[str] = Field(None, description="OCR 解析后的报告文本")
 
 
-class ConversationMemory:
-    """
-    对话记忆模块，用于记录和构建多轮对话上下文
-    """
-
+class ShortTermMemory:
     def __init__(self):
-        self.history: List[dict] = []
+        self.memory = {}
 
-    def add_interaction(self, user_input: str, agent_response: str):
-        self.history.append({"user": user_input, "agent": agent_response})
+    def add(self, user_id: str, messages: List[str]):
+        if user_id not in self.memory:
+            self.memory[user_id] = []
+        self.memory[user_id].extend(messages)
 
-    def get_context(self) -> str:
-        context = ""
-        for interaction in self.history:
-            context += f"患者：{interaction['user']}\n系统：{interaction['agent']}\n"
-        return context
+    def get_context(self, user_id: str) -> str:
+        return "\n".join(self.memory.get(user_id, []))
 
-    def clear(self):
-        self.history = []
+
+class LongTermMemory:
+    def __init__(self):
+        self.vectorstore = FAISS(embedding_function=OpenAIEmbeddings())
+        self.user_indices = {}
+
+    def add(self, user_id: str, messages: List[str]):
+        docs = [Document(page_content=msg, metadata={"user_id": user_id}) for msg in messages]
+        if user_id not in self.user_indices:
+            self.user_indices[user_id] = self.vectorstore
+        self.user_indices[user_id].add_documents(docs)
+
+    def get_context(self, user_id: str, query: str, k: int = 3) -> str:
+        if user_id not in self.user_indices:
+            return ""
+        docs = self.user_indices[user_id].similarity_search(query, k=k)
+        return "\n".join([doc.page_content for doc in docs])
 
 
 class MedicalReportOutput(BaseModel):

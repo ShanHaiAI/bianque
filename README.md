@@ -1,4 +1,4 @@
-# Bian Que AI Medical Self-Diagnosis
+# Bian Que：A AI Medical Self-Diagnosis Agent
 
 [中文版本](./README_CN.md)
 
