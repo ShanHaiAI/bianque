@@ -24,8 +24,8 @@ def close_dialog():
     return gr.update(visible=False)
 
 
-def call_large_model(input_text):
-    response_iterator = diag_agent.run(input_text, user_id='0')
+def call_large_model(input_text,user_info):
+    response_iterator = diag_agent.run(input_text, user_id='0',user_info=user_info)
     full_response = ""
 
     try:
@@ -39,14 +39,18 @@ def call_large_model(input_text):
     except Exception as e:
         return f"发生错误: {str(e)}"
 
-def process_input(input_text, chat_history):
+def process_input(input_text, chat_history,user_info):
+
+    # 检查输入是否为空
+    if not input_text or input_text.isspace():
+        return "", chat_history  # 返回空字符串，保持聊天历史不变
     # 添加用户消息
     chat_history.append({"role": "user", "content": input_text})
 
     # 获取助手回复
     bot_response = ""
     try:
-        for chunk in call_large_model(input_text):
+        for chunk in call_large_model(input_text,user_info):
             bot_response += str(chunk)
     except Exception as e:
         bot_response = f"发生错误: {str(e)}"
@@ -56,13 +60,23 @@ def process_input(input_text, chat_history):
     return "", chat_history
 
 
-def submit_info(gender):
+def submit_info(age, gender, medical_record):
+    # 创建用户信息字典
+    user_info = {
+        'age': [age],
+        'gender': [gender],
+        'medical_history': [medical_record]
+    }
+
+    # 转换为DataFrame
+    import pandas as pd
+
     # 根据性别选择头像
-    if gender == "女":
-        avatar = './static/woman.jpg'
-    else:
-        avatar = './static/man.jpg'
-    return gr.update(visible=False), gr.update(avatar_images=(avatar, './static/doctor.jpg'))
+    avatar = './static/woman.jpg' if gender == "女" else './static/man.jpg'
+
+
+    return gr.update(visible=False), gr.update(avatar_images=(avatar, './static/doctor.jpg')),pd.DataFrame(user_info)
+
 
 
 with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as demo):
@@ -73,7 +87,7 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                  show_download_button=False,
                  container=False,
                  )
-
+    user_info_state = gr.State(value=None)
     chatbot = gr.Chatbot(label="扁鹊对话",
                          elem_id="chatbot",
                          type="messages",
@@ -97,7 +111,7 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
         gender = gr.Radio(label="性别", choices=["男", "女"])
         medical_record = gr.Textbox(label="即往病史", submit_btn=False, lines=5, )
         submit_btn = gr.Button("提交", elem_classes="block-submit", min_width=0)
-        submit_btn.click(fn=submit_info, inputs=gender, outputs=[dialog, chatbot])
+        submit_btn.click(fn=submit_info, inputs=[age, gender, medical_record], outputs=[dialog, chatbot,user_info_state])
     button = gr.Button(
         value="",
         icon='./static/user-circle.svg'
@@ -129,7 +143,7 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                     """
                 # 在submit事件中启用队列
                 text_input.submit(fn=process_input,
-                                  inputs=[text_input, chatbot],
+                                  inputs=[text_input, chatbot,user_info_state],
                                   outputs=[text_input, chatbot])  # 启用队列支持
             with gr.TabItem("看看报告"):
                 image_input = gr.File(
@@ -141,6 +155,3 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                           elem_id="analysis-btn",
                           elem_classes="block-submit")
     gr.Markdown("温馨提示：所有建议仅供参考，如有异常请及时就医。", elem_id="markdown-text")
-
-demo.launch(
-    debug=True)
