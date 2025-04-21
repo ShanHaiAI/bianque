@@ -17,7 +17,7 @@ def ocr_extract_text(image_path: str) -> str:
 
 class MilvusVectorKnowledgeBase:
     def __init__(self, collection_name="medical_docs", hash_file_path="data/inserted_hashes.json"):
-        self.client = MilvusClient(uri='../data/data.db')
+        self.client = MilvusClient(uri='./data/data.db')
         self.collection_name = collection_name
         if self.collection_name not in self.client.list_collections():
             self.client.create_collection(self.collection_name, dimension=1024)

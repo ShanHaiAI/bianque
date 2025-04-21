@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from front.web_ui import demo
+from front.web import demo
 from logger import logger
 
 def main():

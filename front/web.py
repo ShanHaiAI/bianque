@@ -2,7 +2,7 @@
 import gradio as gr
 
 from front.ocr import process_image
-
+from core import diag_agent
 
 # 添加报告处理函数
 def analyze_report(image):
@@ -24,20 +24,42 @@ def close_dialog():
 
 
 def call_large_model(input_text):
-    # 这里模拟调用大模型的过程
-    # 实际实现中，这里可能是调用 API 或本地模型
-    response = f"模型响应：{input_text} 已处理"
-    return response
+    # 获取迭代器
+    response_iterator = diag_agent.run(input_text, user_id='0')
 
+    # 初始化完整响应
+    full_response = ""
+
+    # 逐步获取并返回响应
+    try:
+        for chunk in response_iterator:
+            if isinstance(chunk, dict):
+                # 如果是字典类型的响应，提取消息内容
+                message = chunk.get('content', '') or chunk.get('message', '')
+                full_response += message
+            else:
+                # 如果是字符串类型的响应直接添加
+                full_response += str(chunk)
+            # 使用yield返回当前累积的响应
+            yield full_response
+    except Exception as e:
+        yield f"发生错误: {str(e)}"
+
+def add_user_input(input_text, chat_history):
+    chat_history.append({"role": "user", "content": input_text})
+    # 添加一个空的助手回复
+    return chat_history
 
 def process_input(input_text, chat_history):
-    # 调用大模型
-    response = call_large_model(input_text)
-    # 将用户输入和模型响应添加到聊天历史中
+    # chat_history.append({"role": "user", "content": input_text})
+    # 添加一个空的助手回复
+    chat_history.append({"role": "assistant", "content": ""})
 
-    chat_history.append({"role": "user", "content": input_text})
-    chat_history.append({"role": "assistant", "content": response})
-    return chat_history
+    # 获取动态响应
+    for response in call_large_model(input_text):
+        # 更新最后一条助手消息
+        chat_history[-1]["content"] = response
+        yield chat_history
 
 
 def submit_info(gender):
@@ -95,7 +117,7 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
             with gr.TabItem("问问扁鹊"):
                 # 文字输入框
 
-                text_input = gr.Textbox(placeholder="请输入您的症状描述",
+                text_input = gr.Textbox(placeholder="请输入您的症状描述（按Enter发送）",
                                         submit_btn='➤',
                                         # show_label=True,
                                         # interactive=True,
@@ -103,8 +125,23 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                                         lines=5,
                                         elem_classes="tab-input"
                                         )
-
-                text_input.submit(fn=process_input, inputs=[text_input, chatbot], outputs=[chatbot])
+                text_input.js = """
+                    function(e) {
+                        if (e.ctrlKey && e.key === 'Enter') {
+                            document.querySelector('#submit-btn').click();
+                            return;
+                        }
+                    }
+                    """
+                # 在submit事件中启用队列
+                text_input.submit(fn=add_user_input,
+                                  inputs=[text_input, chatbot],
+                                  outputs=[chatbot],
+                                  queue=True)  # 启用队列支持
+                text_input.submit(fn=process_input,
+                                  inputs=[text_input, chatbot],
+                                  outputs=[chatbot],
+                                  queue=True)  # 启用队列支持
                 text_input.submit(lambda: "", inputs=[], outputs=text_input)
             with gr.TabItem("看看报告"):
                 image_input = gr.File(

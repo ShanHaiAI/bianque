@@ -100,7 +100,13 @@ class DiagnosisAgentGraph:
         output = chain.invoke(
             {"messages": init_input, "user_info": "N/A", "user_id": user_id}, config=config, stream_mode="updates"
         )
-        final_output = output["tone_rewrite"]["messages"][-1]
+        final_outputs = [
+            item["tone_rewrite"]["messages"][-1]
+            for item in output
+            if "tone_rewrite" in item
+        ]
+        # 如果只需要第一个：
+        final_output = final_outputs[0] if final_outputs else None
         return final_output
 
 
