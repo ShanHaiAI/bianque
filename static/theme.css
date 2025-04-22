@@ -98,25 +98,6 @@ main {
     margin: 0 auto; /* 移除左边距，使用自动边距实现居中 */
 }
 
-.submit-button {
-    background-color: #E0D0C0;
-    border: none;
-    border-radius: 50%; /* 设置为50%以实现全圆角 */
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: #335152;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-}
-
-.submit-button:hover {
-    background-color: #D0C0B0;
-}
-
 .dialog {
     position: fixed; /* 固定定位，使其悬浮在页面上层 */
     top: 50%; /* 垂直居中 */
@@ -173,8 +154,8 @@ main {
     background-color: #E0D0C0; /* 背景颜色 */
     border: none; /* 去掉边框 */
     border-radius: 50%; /* 设置为圆形 */
-    width: 2.5rem; /* 宽度 */
-    height: 2.5rem; /* 高度 */
+    width: 4vh; /* 固定宽度 */
+    height: 4vh;
     font-size: 2rem; /* 字体大小 */
     color: #335152; /* 字体颜色 */
     cursor: pointer; /* 鼠标指针样式 */
@@ -184,8 +165,8 @@ main {
 
 #person-btn img {
     color: #335152;
-    width: 1.5rem; /* 设置你想要的宽度 */
-    height: 1.5rem; /* 设置你想要的高度 */
+    width: 3vh; /* 设置你想要的宽度 */
+    height: 3vh; /* 设置你想要的高度 */
 }
 
 #person-btn:hover {
@@ -204,14 +185,14 @@ main {
 
 #analysis-btn {
     position: absolute; /* 绝对定位 */
-    bottom: 0.5rem; /* 距离底部间距 */
-    right: 0.5rem; /* 距离右侧间距 */
+    bottom: 2vh; /* 距离底部间距 */
+    right: 2vh; /* 距离右侧间距 */
     background-color: #E0D0C0;
     border: none;
     border-radius: 50%; /* 圆形按钮 */
-    width: 2rem; /* 固定宽度 */
-    height: 2rem;
-    font-size: 1.2rem;
+    width: 4vh; /* 固定宽度 */
+    height: 4vh;
+    font-size: 2.5vh;
     padding: 0;
     display: flex;
     align-items: center;
