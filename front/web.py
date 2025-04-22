@@ -67,6 +67,27 @@ def call_report_model(input_text, user_conf):
     except Exception as e:
         return f"发生错误: {str(e)}"
 
+def add_content(input_text, image_input, chat_history, user_conf):
+    if not user_conf.get('user_id'):
+        user_conf['user_id'] = str(uuid.uuid4())
+    # 检查输入是否为空
+    if user_conf['select_tab'] == 1:
+        if not input_text or input_text.isspace():
+            gr.Warning("请输入问题")
+            return input_text, image_input, chat_history, user_conf
+        else:
+            # 添加用户消息
+            chat_history.append({"role": "user", "content": input_text})
+            # 获取助手回复
+    else:
+        if not image_input:
+            gr.Warning("请先上传图片")
+            return input_text, image_input, chat_history, user_conf
+        else:
+            # 添加用户消息
+            chat_history.append({"role": "user", "content": gr.File(image_input)})
+    return chat_history, user_conf
+
 
 def process_input(input_text, image_input, chat_history, user_conf):
     if not user_conf.get('user_id'):
@@ -94,7 +115,7 @@ def process_input(input_text, image_input, chat_history, user_conf):
         else:
             ocr_resp = analyze_report(image_input)
             # 添加用户消息
-            chat_history.append({"role": "user", "content": image_input})
+            chat_history.append({"role": "user", "content": gr.File(image_input)})
             # 获取助手回复
             bot_response = ""
             try:
@@ -223,7 +244,7 @@ with (gr.Blocks(css_paths='./static/theme.css', head=shortcut_js, theme=gr.theme
             with gr.TabItem("问问扁鹊") as diag_tab:
                 # 文字输入框
                 diag_tab.select(fn=select_diag, inputs=[user_session], outputs=[user_session])
-                text_input = gr.Textbox(placeholder="请输入您的症状描述（按Enter发送）",
+                text_input = gr.Textbox(placeholder="请输入您的症状描述（按Ctrl+Enter发送）",
                                         # interactive=True,
                                         container=False,
                                         lines=5,
@@ -239,6 +260,9 @@ with (gr.Blocks(css_paths='./static/theme.css', head=shortcut_js, theme=gr.theme
             submit = gr.Button('➤',
                                elem_id="analysis-btn",
                                elem_classes="block-submit")
+            submit.click(fn=add_content,
+                         inputs=[text_input, image_input, chatbot, user_session],
+                         outputs=[chatbot, user_session])
             submit.click(fn=process_input,
                          inputs=[text_input, image_input, chatbot, user_session],
                          outputs=[text_input, image_input, chatbot, user_session])
