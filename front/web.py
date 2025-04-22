@@ -5,18 +5,6 @@ import gradio as gr
 from front.ocr import process_image
 from core import diag_agent, report_agent
 
-shortcut_js = """
-<script>
-function shortcuts(e) {
-    if (e.key.toLowerCase() == "enter" && e.ctrlKey) {
-        document.getElementById("analysis-btn").click();
-    }
-}
-document.addEventListener('keypress', shortcuts, false);
-</script>
-"""
-
-
 # 添加报告处理函数
 def analyze_report(image):
     if image is None:
@@ -74,7 +62,7 @@ def add_content(input_text, image_input, chat_history, user_conf):
     if user_conf['select_tab'] == 1:
         if not input_text or input_text.isspace():
             gr.Warning("请输入问题")
-            return input_text, image_input, chat_history, user_conf
+            return chat_history, user_conf
         else:
             # 添加用户消息
             chat_history.append({"role": "user", "content": input_text})
@@ -82,7 +70,7 @@ def add_content(input_text, image_input, chat_history, user_conf):
     else:
         if not image_input:
             gr.Warning("请先上传图片")
-            return input_text, image_input, chat_history, user_conf
+            return chat_history, user_conf
         else:
             # 添加用户消息
             chat_history.append({"role": "user", "content": gr.File(image_input)})
@@ -90,13 +78,11 @@ def add_content(input_text, image_input, chat_history, user_conf):
 
 
 def process_input(input_text, image_input, chat_history, user_conf):
-    if not user_conf.get('user_id'):
-        user_conf['user_id'] = str(uuid.uuid4())
     # 检查输入是否为空
     bot_response = ""
     if user_conf['select_tab'] == 1:
         if not input_text or input_text.isspace():
-            gr.Warning("请输入问题")
+            # gr.Warning("请输入问题")
             return input_text, image_input, chat_history, user_conf
         else:
             # 添加用户消息
@@ -110,7 +96,7 @@ def process_input(input_text, image_input, chat_history, user_conf):
             # 添加助手消息
     else:
         if not image_input:
-            gr.Warning("请先上传图片")
+            # gr.Warning("请先上传图片")
             return input_text, image_input, chat_history, user_conf
         else:
             ocr_resp = analyze_report(image_input)
@@ -194,7 +180,7 @@ def submit_info(age, gender, medical_record,user_session):
     return gr.update(visible=False), gr.update(avatar_images=(avatar, './static/doctor.jpg')), user_session
 
 
-with (gr.Blocks(css_paths='./static/theme.css', head=shortcut_js, theme=gr.themes.Default()) as demo):
+with (gr.Blocks(css_paths='./static/theme.css', head_paths=['./static/head.html'], theme=gr.themes.Default()) as demo):
     with gr.Row():
         gr.Image(value='./static/banner.jpg',
                  elem_id="bianque-image",
@@ -212,7 +198,10 @@ with (gr.Blocks(css_paths='./static/theme.css', head=shortcut_js, theme=gr.theme
                          show_label=False,
                          container=False,
                          value=[{"role": "assistant",
-                                 "content": "你好，我是扁鹊，你的AI自诊助理。如果有什么身体不舒服的地方，可以告诉我，我会给你一些健康相关的建议。"}],
+                                 "content": "你好，我是扁鹊，你的AI自诊助理。如果有什么身体不舒服的地方，可以告诉我，我会给你一些健康相关的建议。"
+                                            "\n您也可在右上角录入个人信息，助我做出更合理的判断。"}
+                                ,
+                                ],
                          sanitize_html=False,
                          avatar_images=('./static/man.jpg', './static/doctor.jpg'),
                          )
