@@ -1,4 +1,3 @@
-# front/web_ui.py
 import gradio as gr
 
 from front.ocr import process_image
@@ -58,6 +57,46 @@ def process_input(input_text, chat_history,user_info):
     # 添加助手消息
     chat_history.append({"role": "assistant", "content": bot_response})
     return "", chat_history
+
+
+def call_large_model_stream(input_text, user_info):
+    """
+    流式调用大模型诊断 Agent，逐段返回响应内容
+    """
+    try:
+        response_iterator = diag_agent.run(input_text, user_id='0', user_info=user_info)
+        for chunk in response_iterator:
+            if isinstance(chunk, dict):
+                message = chunk.get('content', '') or chunk.get('message', '')
+                if message:
+                    yield message
+            else:
+                yield str(chunk)
+    except Exception as e:
+        yield f"发生错误: {str(e)}"
+
+
+def process_input_stream(input_text, chat_history, user_info):
+    """
+    处理用户输入并流式返回助手响应，适用于 Gradio ChatInterface 的 generator 模式
+    """
+    if not input_text or input_text.isspace():
+        yield "", chat_history
+        return
+
+    # 添加用户消息
+    chat_history.append({"role": "user", "content": input_text})
+    bot_message = ""
+
+    try:
+        for chunk in call_large_model_stream(input_text, user_info):
+            bot_message += chunk
+            # 实时 yield 中间结果（每次更新 bot 说的内容）
+            yield "", chat_history + [{"role": "assistant", "content": bot_message}]
+    except Exception as e:
+        bot_message = f"发生错误: {str(e)}"
+        yield "", chat_history + [{"role": "assistant", "content": bot_message}]
+
 
 
 def submit_info(age, gender, medical_record):
