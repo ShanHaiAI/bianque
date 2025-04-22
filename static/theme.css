@@ -61,6 +61,8 @@ main {
 
 .tab-input {
     display: flex;
+    width: 70vw;
+    height: 15vh;
     padding: 0.5rem;
     border: 1px solid #ccc; /* 边框 */
     align-items: center;
@@ -133,6 +135,7 @@ main {
     border: none;
     cursor: pointer;
     color: #335152;
+    z-index: 500;
     transition: background-color 0.3s ease;
 }
 
