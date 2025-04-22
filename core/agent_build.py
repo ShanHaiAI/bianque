@@ -142,7 +142,7 @@ class ReportAgentGraph:
             rag_result = vector_knowledge_query(last_response, tone_kb)
             prompt = get_prompt_template("tone_rewrite").format(result=last_response, rag_result=rag_result)
             llm_response = self.llm.invoke(prompt)
-            state["messages"].append(f"Final Output: {llm_response}")
+            state["messages"].append(str(llm_response))
             logger.debug(llm_response)
             return state
 
