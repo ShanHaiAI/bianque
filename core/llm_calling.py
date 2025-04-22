@@ -5,12 +5,14 @@ from langchain_community.llms import Tongyi
 from openai import OpenAI
 from dotenv import load_dotenv
 
+from core.basic_class import get_logger, log_execution_time
+
 load_dotenv()
 api_key = os.getenv("DASHSCOPE_API_KEY")
 
-
+logger = get_logger()
+@log_execution_time(logger)
 def get_llm():
-
     return Tongyi( model_name="qwen-turbo",dashscope_api_key=api_key,)
 
 

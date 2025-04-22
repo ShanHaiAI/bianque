@@ -1,18 +1,11 @@
 import hashlib
 import json
 import os
-import uuid
 
 from pymilvus import MilvusClient
+
 from core.llm_calling import OpenAIEmbeddingModel
 
-
-def ocr_extract_text(image_path: str) -> str:
-    """
-    使用 pytesseract 对上传图片进行 OCR 解析，
-    请确保 Tesseract 已安装且配置中文语言包（chi_sim）
-    """
-    pass  # OCR 部分暂时保留为空
 
 
 class MilvusVectorKnowledgeBase:
@@ -40,10 +33,18 @@ class MilvusVectorKnowledgeBase:
             json.dump(list(hashes), f)
 
     def insert_documents(self, docs: list, batch_size: int = 1000, deduplicate: bool = True) -> str:
-        # 生成文本对应的哈希
+        """
+
+        Args:
+            docs:
+            batch_size:
+            deduplicate:
+
+        Returns:
+
+        """
         hashes = [self._text_hash(text) for text in docs]
 
-        # 加载本地已插入哈希
         inserted_hashes = self._load_inserted_hashes() if deduplicate else set()
 
         embeddings = self.model.encode(docs)
@@ -53,7 +54,6 @@ class MilvusVectorKnowledgeBase:
         for i in range(len(docs)):
             h = hashes[i]
 
-            # 如果开启去重且该文档已存在，则跳过
             if deduplicate and h in inserted_hashes:
                 continue
 
@@ -67,13 +67,11 @@ class MilvusVectorKnowledgeBase:
             chunk_with_embeddings.append(chunk_dict)
             new_hashes.add(h)
 
-        # 分批插入数据到 Milvus
         for i in range(0, len(chunk_with_embeddings), batch_size):
             batch = chunk_with_embeddings[i:i + batch_size]
             self.client.insert(collection_name=self.collection_name, data=batch)
             print("Inserted {} documents".format(len(batch)))
 
-        # 保存新的 hash 值
         if deduplicate:
             inserted_hashes.update(new_hashes)
             self._save_inserted_hashes(inserted_hashes)
@@ -88,7 +86,6 @@ class MilvusVectorKnowledgeBase:
             limit=top_k,
             output_fields=["text", "subject"],
         )
-        print(search_results)
         return search_results
 
 
@@ -120,7 +117,6 @@ def read_documents_from_file(file_path: str) -> list:
                         doc = f"{k}: {v}"
                         doc = doc.replace("{", "").replace("}", "")
                         docs.append(doc.strip())
-                        #print(doc)
                 elif isinstance(data, list):
                     for item in data:
                         doc = str(item)
@@ -165,7 +161,7 @@ def initialize_knowledge_bases():
         docs = read_documents_from_file(file_path)
         if docs:
             print(f"向 {kb_name} 上传 {len(docs)} 个文档...")
-            result = kb_instances[kb_name].insert_documents(docs)
+            kb_instances[kb_name].insert_documents(docs)
         else:
             print(f"{kb_name} 未能读取到文档。")
 
@@ -176,10 +172,8 @@ def initialize_knowledge_bases():
 # 7. 示例主程序
 # -----------------------------
 if __name__ == "__main__":
-    # 初始化三个知识库
     diagnosis_kb, physical_examination_kb, patient_support_kb = initialize_knowledge_bases()
 
-    # 示例查询（根据需要替换查询内容）
     query = "发热"
     print("诊断知识库查询结果：")
     print(vector_knowledge_query(query, diagnosis_kb))
@@ -188,7 +182,4 @@ if __name__ == "__main__":
     print("患者安抚查询结果：")
     print(vector_knowledge_query(query, patient_support_kb))
 
-
-    sample_path = "sample_report.jpg"
-    print("OCR 解析结果：", ocr_extract_text(sample_path))
 
