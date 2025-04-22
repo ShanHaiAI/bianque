@@ -1,3 +1,5 @@
+import uuid
+
 import gradio as gr
 
 from front.ocr import process_image
@@ -23,8 +25,10 @@ def close_dialog():
     return gr.update(visible=False)
 
 
-def call_large_model(input_text,user_info):
-    response_iterator = diag_agent.run(input_text, user_id='0',user_info=user_info)
+def call_large_model(input_text,session_user_id,user_info):
+
+    response_iterator = diag_agent.run(input_text, user_id=session_user_id,user_info=user_info)
+
     full_response = ""
 
     try:
@@ -38,25 +42,26 @@ def call_large_model(input_text,user_info):
     except Exception as e:
         return f"发生错误: {str(e)}"
 
-def process_input(input_text, chat_history,user_info):
+def process_input(input_text, chat_history,session_user_id,user_info):
 
+    if session_user_id is None:
+        session_user_id = str(uuid.uuid4())
     # 检查输入是否为空
     if not input_text or input_text.isspace():
-        return "", chat_history  # 返回空字符串，保持聊天历史不变
+        return "", chat_history,session_user_id  # 返回空字符串，保持聊天历史不变
     # 添加用户消息
     chat_history.append({"role": "user", "content": input_text})
-
     # 获取助手回复
     bot_response = ""
     try:
-        for chunk in call_large_model(input_text,user_info):
+        for chunk in call_large_model(input_text,session_user_id,user_info):
             bot_response += str(chunk)
     except Exception as e:
         bot_response = f"发生错误: {str(e)}"
 
     # 添加助手消息
     chat_history.append({"role": "assistant", "content": bot_response})
-    return "", chat_history
+    return "", chat_history,session_user_id
 
 
 def call_large_model_stream(input_text, user_info):
@@ -126,6 +131,7 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                  show_download_button=False,
                  container=False,
                  )
+    user_id = gr.State(value=None)
     user_info_state = gr.State(value=None)
     chatbot = gr.Chatbot(label="扁鹊对话",
                          elem_id="chatbot",
@@ -182,8 +188,8 @@ with (gr.Blocks(css_paths='./static/theme.css', theme=gr.themes.Default()) as de
                     """
                 # 在submit事件中启用队列
                 text_input.submit(fn=process_input,
-                                  inputs=[text_input, chatbot,user_info_state],
-                                  outputs=[text_input, chatbot])  # 启用队列支持
+                                  inputs=[text_input, chatbot,user_id,user_info_state],
+                                  outputs=[text_input, chatbot,user_id])  # 启用队列支持
             with gr.TabItem("看看报告"):
                 image_input = gr.File(
                     height=115,

@@ -15,7 +15,7 @@ main {
 }
 
 #bianque-image img {
-    width: 30rem; /* 缩小图片宽度 */
+    width: 30vw; /* 缩小图片宽度 */
 }
 
 /* 添加Tabs切换动画 */
@@ -74,7 +74,7 @@ main {
     flex-direction: column;
     border: 1px solid #ccc; /* 边框 */
     align-items: center;
-    width: 40rem;
+    width: 70vw;
     border-radius: 1rem; /* 圆角 */
     box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.2), /* 仅底部外阴影 */ inset 0 6px 8px -6px rgba(0, 0, 0, 0.13);
     /*overflow: hidden; !* 隐藏溢出 *!*/
