@@ -79,7 +79,11 @@ main {
     width: 70vw;
     border-radius: 1rem; /* 圆角 */
     box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.2), /* 仅底部外阴影 */ inset 0 6px 8px -6px rgba(0, 0, 0, 0.13);
-    /*overflow: hidden; !* 隐藏溢出 *!*/
+    overflow: hidden;
+}
+
+#chatbot > div {
+    overflow: hidden;
 }
 
 #chatbot > div > div {
