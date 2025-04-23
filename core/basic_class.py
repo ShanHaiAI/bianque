@@ -134,7 +134,11 @@ class ShortTermMemory:
     def add(self, user_id: str, messages: List[str]):
         if user_id not in self.memory:
             self.memory[user_id] = []
-        self.memory[user_id].extend(messages)
+        messages_list = []
+        print(messages)
+        for message in messages:
+            messages_list.append(message.content)
+        self.memory[user_id].extend(messages_list)
 
     def get_context(self, user_id: str) -> str:
         return "\n".join(str(self.memory.get(user_id, [])))
