@@ -1,0 +1,9 @@
+<script>
+    function shortcuts(e) {
+        if (e.key.toLowerCase() === "enter" && e.ctrlKey) {
+            document.getElementById("analysis-btn").click();
+        }
+    }
+
+    document.addEventListener('keypress', shortcuts, false);
+</script>
